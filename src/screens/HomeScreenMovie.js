@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { View,Text,FlatList,Image,TouchableOpacity,StyleSheet,SafeAreaView } from "react-native";
 
 const moviesall=[
@@ -190,11 +190,42 @@ const moviesall=[
 
 ]
 export default function HomeScreenMovies({navigation}){
+    const [movies, setMovies] = useState(moviesall); //...
+    const deleteMovie = (id, category) => {
+        setMovies(prevMovies =>
+            prevMovies.map(categoryItem => ({
+                ...categoryItem,
+                movies: categoryItem.category === category 
+                    ? categoryItem.movies.filter(movie => movie.id !== id) 
+                    : categoryItem.movies
+            }))
+        );
+    };
+    const editMovieHandler = (updatedMovie) => {
+        setMovies(prevMovies =>
+            prevMovies.map(categoryItem => ({
+                ...categoryItem,
+                movies: categoryItem.category === updatedMovie.category 
+                    ? categoryItem.movies.map(movieItem =>
+                        movieItem.id === updatedMovie.id ? updatedMovie : movieItem
+                    ) 
+                    : categoryItem.movies 
+            }))
+        );
+    };
     const renderMovie = ({item})=>(
         <TouchableOpacity style={styles.card} onPress={()=>navigation.navigate('MovieDetail',{movie:item})}>
             
             <Image source={{uri:item.image}} style={styles.image}/>
             <Text style={styles.title}>{item.title}</Text>
+            <View style={styles.buttonContainer}>
+                <TouchableOpacity style={styles.editButton} onPress={() => navigation.navigate('Edit', {movie: item, editMovieHandler})}>
+                <Text style={styles.buttonText}>🖋️</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.deleteButton} onPress={() => deleteMovie(item.id, item.category)}>
+                <Text style={styles.buttonText}>🗑️</Text>
+                </TouchableOpacity>
+            </View>
         </TouchableOpacity>
     );
     const rendercategory = ({item})=>(
@@ -214,12 +245,21 @@ export default function HomeScreenMovies({navigation}){
         
         <SafeAreaView style={styles.fondo}>
             <Text style={styles.title2}>TEC M O V I E S</Text>
-
+            <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('Add', {setMovies})}>
+                <Text style={styles.addButtonText}>Agregar Album</Text>
+            </TouchableOpacity>
+           
             <FlatList
-            data={moviesall}
+            data={movies}
             renderItem={rendercategory}
             keyExtractor={(categor)=>categor.category}
+            style={{ width: '100%' }} // Set width
+            contentContainerStyle={{ paddingBottom: 80 }}
             />
+            
+
+            
+            
 
         </SafeAreaView>
     )
@@ -238,12 +278,12 @@ const styles = StyleSheet.create({
         borderRadius:10,
         overflow:'visible',
         borderColor:'white',
-        borderWidth:2,
+        borderWidth:3,
         marginTop:15,
         marginLeft:0,
         marginRight:10,
         width:170,
-        height:220,
+        height:300,
         alignItems:'center'
     },
     image:{
@@ -274,6 +314,36 @@ const styles = StyleSheet.create({
         fontSize:20,
         color:'white',
         marginTop:10
+    },
+    buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 10
+    },
+    editButton: {
+        backgroundColor: '#4CAF50',
+        padding: 10,
+        borderRadius: 5
+    },
+    deleteButton: {
+        backgroundColor: '#F44336',
+        padding: 10,
+        borderRadius: 5
+    },
+    buttonText: {
+        color: '#fff',
+        fontWeight: 'bold'
+    },
+    addButton: {
+        backgroundColor: '#2196F3',
+        padding: 10,
+        borderRadius: 5,
+        marginBottom: 10
+    },
+    addButtonText: {
+        color: '#fff',
+        fontWeight: 'bold',
+        textAlign: 'center'
     }
 
 
