@@ -82,7 +82,7 @@ const moviesall=[
         {
             id:4,
             title:"Desde mi cielo",
-            category:"Romance",
+            category:"Suspense",
             year:"2009",
             sinopsis:"Después de que es violada y asesinada, una joven de 14 años vigila desde el cielo mientras su familia intenta superar lo vivido y el homicida continúa impune.",
             clasification:"PG-13",
@@ -234,7 +234,11 @@ export default function HomeScreenMovies({navigation}){
         <TouchableOpacity style={styles.card} onPress={()=>navigation.navigate('MovieDetail',{movie:item})}>
             
             <Image source={{uri:item.image}} style={styles.image}/>
-            <Text style={styles.title}>{item.title}</Text>
+            <View>
+            
+            </View>
+            
+
             <View style={styles.buttonContainer}>
                 <TouchableOpacity style={styles.editButton} onPress={() => navigation.navigate('Edit', {movie: item, editMovieHandler})}>
                 <Text style={styles.buttonText}>🖋️</Text>
@@ -243,6 +247,7 @@ export default function HomeScreenMovies({navigation}){
                 <Text style={styles.buttonText}>🗑️</Text>
                 </TouchableOpacity>
             </View>
+            <Text style={styles.title}>{item.title}</Text>
         </TouchableOpacity>
     );
     const rendercategory = ({item})=>(
@@ -282,7 +287,6 @@ export default function HomeScreenMovies({navigation}){
                 <Text style={styles.addButtonText}>Agregar Album ➕</Text>
             </TouchableOpacity>
 
-            
             <FlatList
             data={busqueda}
             renderItem={rendercategory}
@@ -291,8 +295,7 @@ export default function HomeScreenMovies({navigation}){
             contentContainerStyle={{ paddingBottom: 200 }}
             /> 
 
-           
-            
+        
         </SafeAreaView>
     )
 }
@@ -310,20 +313,21 @@ const styles = StyleSheet.create({
         borderRadius:10,
         overflow:'visible',
         borderColor:'white',
-        borderWidth:3,
+        borderWidth:1,
         marginTop:15,
         marginLeft:0,
         marginRight:10,
         width:170,
-        height:300,
+        height:270,
         alignItems:'center'
     },
     image:{
         width:'100%',
-        height:150
+        height:150,
+        borderRadius:10,
     },
     title:{
-        fontSize:20,
+        fontSize:14,
         fontWeight:'',
         padding:10,
         alignItems:'center',
@@ -349,14 +353,16 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginTop: 10
+        justifyContent: 'flex-start',
+        marginBlockEnd:10
+        
     },
     editButton: {
-        backgroundColor: '#4CAF50',
+        backgroundColor: 'gray',
         padding: 10,
         borderRadius: 5,
-        marginRight: 40
+        marginRight: 40,
+        marginRight:20
     },
     deleteButton: {
         backgroundColor: '#F44336',
@@ -414,6 +420,11 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,       
         marginVertical: 10,         
       },
+      Flailist:{
+        width:'100%',
+        height:'100%',
+        marginBottom:20
+      }
 
 })
     
