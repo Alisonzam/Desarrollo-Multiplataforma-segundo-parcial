@@ -1,5 +1,6 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { View,Text,FlatList,Image,TouchableOpacity,StyleSheet,SafeAreaView,TextInput } from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const moviesall=[
     {
@@ -193,6 +194,22 @@ export default function HomeScreenMovies({navigation}){
     const [movies, setMovies] = useState(moviesall); //...
     const [searchText, setSearchText] = useState('');
 
+    useEffect(() => {
+        const loadMovies = async () => {
+            const stored = await AsyncStorage.getItem('movies');
+            if (stored) {
+                setMovies(JSON.parse(stored));
+            } else {
+                setMovies(moviesall); // Tus datos por defecto
+            }
+        };
+        loadMovies();
+    }, []);
+
+    useEffect(() => {
+        AsyncStorage.setItem('movies', JSON.stringify(movies));
+    }, [movies]);
+
     const ordenar=()=>{
         setMovies(prevMovies =>
         [...prevMovies].sort((a,b)=>a.category.localeCompare(b.category))
@@ -207,6 +224,12 @@ export default function HomeScreenMovies({navigation}){
         ...categoryItem,
         movies: categoryItem.movies.filter(movie=>movie.title.toLowerCase().includes(searchText.toLowerCase()))
     })).filter(categoryItem=>categoryItem.movies.length>0);
+
+    const restaurarPeliculas = async () => {
+        setMovies(moviesall); 
+        await AsyncStorage.setItem('movies', JSON.stringify(moviesall)); 
+    };
+    
 
     const deleteMovie = (id, category) => {
         setMovies(prevMovies =>
@@ -279,7 +302,10 @@ export default function HomeScreenMovies({navigation}){
            
 
             <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('Add', {setMovies})}>
-                <Text style={styles.addButtonText}>Agregar Album ➕</Text>
+                <Text style={styles.addButtonText}>Agregar Película ➕</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.addButton} onPress={restaurarPeliculas}>
+                <Text style={styles.addButtonText}>Restaurar Películas 🔄</Text>
             </TouchableOpacity>
 
             
