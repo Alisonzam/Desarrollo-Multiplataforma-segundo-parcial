@@ -260,6 +260,7 @@ export default function HomeScreenMovies({navigation}){
             horizontal
             renderItem={renderMovie}
             keyExtractor={(movie)=>movie.id.toString()}
+            style={styles.Flailist}
             />
         </View>
     );
@@ -284,7 +285,7 @@ export default function HomeScreenMovies({navigation}){
            
 
             <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('Add', {setMovies})}>
-                <Text style={styles.addButtonText}>Agregar Album ➕</Text>
+                <Text style={styles.addButtonText}>Add +</Text>
             </TouchableOpacity>
 
             <FlatList
@@ -312,14 +313,11 @@ const styles = StyleSheet.create({
         backgroundColor:'black',
         borderRadius:10,
         overflow:'visible',
-        borderColor:'white',
         borderWidth:1,
         marginTop:15,
-        marginLeft:0,
         marginRight:10,
         width:170,
-        height:270,
-        alignItems:'center'
+        height:250
     },
     image:{
         width:'100%',
@@ -337,7 +335,7 @@ const styles = StyleSheet.create({
         color:'white'
     },
     fondo:{
-        backgroundColor:'black',
+        backgroundColor:'#2a2a2a',
         alignItems:'center'
     },
     title2:{
@@ -349,35 +347,35 @@ const styles = StyleSheet.create({
     category:{
         fontSize:20,
         color:'white',
-        marginTop:10
+        marginTop:0,
+        marginLeft:10,
+        fontWeight:'bold'
     },
     buttonContainer: {
         flexDirection: 'row',
-        justifyContent: 'flex-start',
-        marginBlockEnd:10
+        justifyContent: 'flex-end',
         
     },
     editButton: {
         backgroundColor: 'gray',
         padding: 10,
-        borderRadius: 5,
-        marginRight: 40,
-        marginRight:20
+        borderRadius: 35,
+        marginRight: 5
     },
     deleteButton: {
-        backgroundColor: '#F44336',
+        backgroundColor: '#e7e7e7',
         padding: 10,
-        borderRadius: 5
+        borderRadius: 55
     },
     buttonText: {
         color: '#fff',
         fontWeight: 'bold'
     },
     addButton: {
-        backgroundColor: '#2196F3',
+        backgroundColor: '#686b6c',
         padding: 10,
         borderRadius: 5,
-        marginBottom: 10,
+        marginBottom: 5,
         marginTop:10
     },
     addButtonText: {
@@ -421,9 +419,7 @@ const styles = StyleSheet.create({
         marginVertical: 10,         
       },
       Flailist:{
-        width:'100%',
-        height:'100%',
-        marginBottom:20
+        marginLeft:10
       }
 
 })
