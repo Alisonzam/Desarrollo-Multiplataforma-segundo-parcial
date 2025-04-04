@@ -1,28 +1,28 @@
 import React, {useState} from "react";
 import {View, Text, TextInput, Button, SafeAreaView, Image, StyleSheet, Alert, Platform, BackHandler,TouchableOpacity, ImageBackground} from "react-native";
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function LoginScreen({navigation}){
     
-    const users = ["gaby", "alison", "ramon"]
-    const passwords = ["contrasena1", "1234", "contrasena3"]
+    
 
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
 
-    const authentication = () =>{
-        let isAuthenticated = false;
-
-        for (let i = 0; i < users.length; i++){
-            if(user == users[i] && password == passwords[i]){
-                isAuthenticated = true;
-                break;
+    const authentication = async () =>{
+        try {
+            const storedUsers = await AsyncStorage.getItem('users');
+            const users = storedUsers ? JSON.parse(storedUsers) : [];
+    
+            const userFound = users.find(u => u.username === user && u.password === password);
+            
+            if (userFound) {
+                navigation.replace("Movies");
+            } else {
+                Alert.alert("ERROR", "Incorrect username or password");
             }
-        }
-
-        if (isAuthenticated) {
-            navigation.replace("Movies"); 
-        } else {
-            Alert.alert("ERROR", "Incorrect username or password"); 
+        } catch (error) {
+            Alert.alert("Error", "No se pudo verificar el usuario");
+            console.error(error);
         }
     }
 

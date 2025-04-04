@@ -1,17 +1,39 @@
 import React, {useState} from "react";
 import {View, Text, TextInput, Button, SafeAreaView, Image, StyleSheet, Alert, Platform, BackHandler,TouchableOpacity, ImageBackground} from "react-native";
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 export default function SignUpScreen({navigation}){
 
     const [user, setUser] = useState('');
     const [password, setPassword] = useState('');
     
 
-    const goToLogin = () => {
-        navigation.reset({
-            index: 0,
-            routes: [{ name: "Login" }], 
-        });
+    const goToLogin = async  () => {
+        if (!user || !password) {
+            Alert.alert("Error", "Usuario y contraseña son obligatorios");
+            return;
+        }
+
+
+        try {
+            
+            const storedUsers = await AsyncStorage.getItem('users');
+            const users = storedUsers ? JSON.parse(storedUsers) : [];
+    
+            const userExists = users.some(u => u.username === user);
+            if (userExists) {
+                Alert.alert("Error", "El usuario ya está registrado");
+                return;
+            }
+    
+            users.push({ username: user, password });
+            await AsyncStorage.setItem('users', JSON.stringify(users));
+    
+            Alert.alert("Registro exitoso", "Ahora puedes iniciar sesión");
+            navigation.reset({ index: 0, routes: [{ name: "Login" }] });
+        } catch (error) {
+            Alert.alert("Error", "Ocurrió un problema al registrar");
+            console.error(error);
+        }
     }
     return(
         
