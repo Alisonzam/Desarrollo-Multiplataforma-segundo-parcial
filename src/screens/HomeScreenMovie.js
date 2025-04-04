@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { View,Text,FlatList,Image,TouchableOpacity,StyleSheet,SafeAreaView } from "react-native";
+import { View,Text,FlatList,Image,TouchableOpacity,StyleSheet,SafeAreaView,TextInput } from "react-native";
 
 const moviesall=[
     {
@@ -191,6 +191,22 @@ const moviesall=[
 ]
 export default function HomeScreenMovies({navigation}){
     const [movies, setMovies] = useState(moviesall); //...
+    const [searchText, setSearchText] = useState('');
+    const ordenar=()=>{
+        setMovies(prevMovies =>
+        [...prevMovies].sort((a,b)=>a.category.localeCompare(b.category))
+            .map(categoryItem => ({
+                ...categoryItem,
+                movies: [...categoryItem.movies].sort((a, b) => a.title.localeCompare(b.title)) // Ordena A-Z
+            }))
+        );
+    };
+    
+    const busqueda = movies.map(categoryItem=>({
+        ...categoryItem,
+        movies: categoryItem.movies.filter(movie=>movie.title.toLowerCase().includes(searchText.toLowerCase()))
+    })).filter(categoryItem=>categoryItem.movies.length>0);
+
     const deleteMovie = (id, category) => {
         setMovies(prevMovies =>
             prevMovies.map(categoryItem => ({
@@ -245,9 +261,32 @@ export default function HomeScreenMovies({navigation}){
         
         <SafeAreaView style={styles.fondo}>
             <Text style={styles.title2}>TEC M O V I E S</Text>
-            <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('Add', {setMovies})}>
-                <Text style={styles.addButtonText}>Agregar Album</Text>
+
+            <View style={styles.buttonRow}>
+            <TouchableOpacity style={styles.sortButton} onPress={ordenar}>
+                <Text style={styles.sortButtonText}>A-Z ↑↓</Text>
             </TouchableOpacity>
+            <Text  style={styles.icono}>🔍</Text>
+            <TextInput
+            style={styles.searchInput}
+            placeholder="Buscar película por título..."
+            value={searchText}
+            onChangeText={text => setSearchText(text)}
+            />
+             
+            </View>
+           
+
+            
+
+            <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('Add', {setMovies})}>
+                <Text style={styles.addButtonText}>Agregar Album ➕</Text>
+            </TouchableOpacity>
+
+            
+
+
+            
            
             <FlatList
             data={movies}
@@ -258,7 +297,11 @@ export default function HomeScreenMovies({navigation}){
             />
             
 
-            
+            <FlatList
+            data={busqueda}
+            renderItem={rendercategory}
+            keyExtractor={categor => categor.category}
+            />  
             
 
         </SafeAreaView>
@@ -338,15 +381,49 @@ const styles = StyleSheet.create({
         backgroundColor: '#2196F3',
         padding: 10,
         borderRadius: 5,
-        marginBottom: 10
+        marginBottom: 10,
+        marginTop:10
     },
     addButtonText: {
         color: '#fff',
         fontWeight: 'bold',
         textAlign: 'center'
-    }
-
-
+    },
+    sortButton: {
+        backgroundColor: 'gray',
+        padding: 10,
+        borderRadius: 10,
+        marginVertical: 10,
+        marginLeft:10,
+        marginRight: 90
+        
+    },
+    sortButtonText: {
+        color: '#fff',
+        fontWeight: 'bold',
+    },
+    searchInput: {
+        backgroundColor: '#fff',
+        padding: 10,
+        marginVertical: 10,
+        borderRadius: 8,
+        borderColor: '#ccc',
+        borderWidth: 1,
+        width: '50%',
+        
+      },
+     icono:{
+        padding: 10,
+        marginVertical: 10,
+        marginLeft:0,
+        marginRight: 0,
+        fontSize:16
+     },
+      buttonRow: {
+        flexDirection: 'row',        
+        paddingHorizontal: 10,       
+        marginVertical: 10,         
+      },
 
 })
     
