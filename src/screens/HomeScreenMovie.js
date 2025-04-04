@@ -192,6 +192,7 @@ const moviesall=[
 export default function HomeScreenMovies({navigation}){
     const [movies, setMovies] = useState(moviesall); //...
     const [searchText, setSearchText] = useState('');
+
     const ordenar=()=>{
         setMovies(prevMovies =>
         [...prevMovies].sort((a,b)=>a.category.localeCompare(b.category))
@@ -277,33 +278,19 @@ export default function HomeScreenMovies({navigation}){
             </View>
            
 
-            
-
             <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('Add', {setMovies})}>
                 <Text style={styles.addButtonText}>Agregar Album ➕</Text>
             </TouchableOpacity>
 
             
-
-
-            
-           
-            <FlatList
-            data={movies}
-            renderItem={rendercategory}
-            keyExtractor={(categor)=>categor.category}
-            style={{ width: '100%' }} // Set width
-            contentContainerStyle={{ paddingBottom: 80 }}
-            />
-            
-
             <FlatList
             data={busqueda}
             renderItem={rendercategory}
             keyExtractor={categor => categor.category}
-            />  
-            
+            /> 
 
+           
+            
         </SafeAreaView>
     )
 }
