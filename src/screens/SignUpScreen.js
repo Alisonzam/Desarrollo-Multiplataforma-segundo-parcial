@@ -9,7 +9,7 @@ export default function SignUpScreen({navigation}){
 
     const goToLogin = async  () => {
         if (!user || !password) {
-            Alert.alert("Error", "Usuario y contraseña son obligatorios");
+            Alert.alert("Error", "Username and password are required");
             return;
         }
 
@@ -21,17 +21,17 @@ export default function SignUpScreen({navigation}){
     
             const userExists = users.some(u => u.username === user);
             if (userExists) {
-                Alert.alert("Error", "El usuario ya está registrado");
+                Alert.alert("Error", "The user is already registered");
                 return;
             }
     
             users.push({ username: user, password });
             await AsyncStorage.setItem('users', JSON.stringify(users));
     
-            Alert.alert("Registro exitoso", "Ahora puedes iniciar sesión");
+            Alert.alert("Successful registration", "You can now log in");
             navigation.reset({ index: 0, routes: [{ name: "Login" }] });
         } catch (error) {
-            Alert.alert("Error", "Ocurrió un problema al registrar");
+            Alert.alert("Error", "There was an error");
             console.error(error);
         }
     }

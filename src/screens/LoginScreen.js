@@ -21,7 +21,7 @@ export default function LoginScreen({navigation}){
                 Alert.alert("ERROR", "Incorrect username or password");
             }
         } catch (error) {
-            Alert.alert("Error", "No se pudo verificar el usuario");
+            Alert.alert("Error", "User could not be verified");
             console.error(error);
         }
     }

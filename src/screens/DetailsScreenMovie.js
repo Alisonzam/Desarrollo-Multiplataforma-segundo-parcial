@@ -1,5 +1,5 @@
 import React from "react";
-import { View,Text,FlatList,Image,TouchableOpacity,StyleSheet,SafeAreaView, Button } from "react-native";
+import { View,Text,Image,StyleSheet,SafeAreaView, Button } from "react-native";
 
 export default function DetailsScreenMovie({route,navigation}){
     const {movie}=route.params;
@@ -18,14 +18,14 @@ export default function DetailsScreenMovie({route,navigation}){
             
             <View style={styles.textt}>   
                 <Text style={styles.title}>{movie.title}</Text>
-                <Text style={styles.description}>{movie.year}  {movie.category}                           {movie.clasification}</Text> 
+                <Text style={styles.description}>{movie.year}       {movie.rating}                              {movie.clasification}</Text> 
             </View>
             <View style={styles.textt2}>
                 <Text style={styles.text}>{movie.sinopsis}</Text>
             </View >
 
            
-            <Button style={styles.button} onPress={goToRes} title="Reseñas"/>
+            <Button style={styles.button} onPress={goToRes} title="Reviews"/>
 
         </SafeAreaView>
         </SafeAreaView>

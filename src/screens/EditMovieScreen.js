@@ -1,10 +1,10 @@
 import React, {useState} from "react";
-import {View, TextInput, Button, StyleSheet, SafeAreaView} from "react-native";
+import {TextInput, Button, StyleSheet, SafeAreaView} from "react-native";
 
 export default function EditMovieScreen({route, navigation}){
     const {movie, editMovieHandler} = route.params;
     const [title, setTitle] = useState(movie.title);
-    const [category, setCategory] = useState(movie.category);
+    const [rating, setRating] = useState(movie.rating);
     const [year, setYear] = useState(movie.year);
     const [sinopsis, setSinopsis] = useState(movie.sinopsis);
     const [clasification, setClasification] = useState(movie.clasification);
@@ -15,7 +15,7 @@ export default function EditMovieScreen({route, navigation}){
         const updatedMovie = {
             ...movie,
             title,
-            category,
+            rating,
             year,
             sinopsis,
             clasification,
@@ -35,9 +35,9 @@ export default function EditMovieScreen({route, navigation}){
             />
             <TextInput
                 style = {styles.input}
-                placeholder = "Category"
-                value={category}
-                onChangeText={setCategory}
+                placeholder = "Rating"
+                value={rating}
+                onChangeText={setRating}
             />
             <TextInput
                 style = {styles.input}
