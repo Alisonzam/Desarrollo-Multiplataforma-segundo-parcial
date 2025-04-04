@@ -8,12 +8,6 @@ import LoginScreenMovie from "../screens/LoginScreen";
 import SignUpScreenMovie from "../screens/SignUpScreen";
 import EditScreenMovie from "../screens/EditMovieScreen";
 import AddScreenMovie from "../screens/AddMovieScreen";
-import ResultsScreenMovie from "../screens/MovieResultsScreen";
-
-/*
-
-<Stack.Screen name='Add' component={AddScreenMovie}/>
-<Stack.Screen name='Results' component={ResultsScreenMovie}/>*/
 
 export default function NavigationMovie(){
     return(
@@ -24,6 +18,7 @@ export default function NavigationMovie(){
             <Stack.Screen name='Login' component={LoginScreenMovie}/>
             <Stack.Screen name='SignUp' component={SignUpScreenMovie}/>
             <Stack.Screen name='Edit' component={EditScreenMovie}/>
+            <Stack.Screen name='Add' component={AddScreenMovie}/>
             
         </Stack.Navigator>
     )

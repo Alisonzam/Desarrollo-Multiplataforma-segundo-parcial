@@ -287,6 +287,8 @@ export default function HomeScreenMovies({navigation}){
             data={busqueda}
             renderItem={rendercategory}
             keyExtractor={categor => categor.category}
+            style={{ width: '100%' }} // Set width
+            contentContainerStyle={{ paddingBottom: 200 }}
             /> 
 
            
@@ -353,7 +355,8 @@ const styles = StyleSheet.create({
     editButton: {
         backgroundColor: '#4CAF50',
         padding: 10,
-        borderRadius: 5
+        borderRadius: 5,
+        marginRight: 40
     },
     deleteButton: {
         backgroundColor: '#F44336',
