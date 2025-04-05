@@ -18,7 +18,7 @@ export default function DetailsScreenMovie({route,navigation}){
             
             <View style={styles.textt}>   
                 <Text style={styles.title}>{movie.title}</Text>
-                <Text style={styles.description}>{movie.year}       {movie.rating}                              {movie.clasification}</Text> 
+                <Text style={styles.description}>{movie.year}       {movie.rating}             {movie.clasification}</Text> 
             </View>
             <View style={styles.textt2}>
                 <Text style={styles.text}>{movie.sinopsis}</Text>

@@ -5,6 +5,7 @@ export default function EditMovieScreen({route, navigation}){
     const {movie, editMovieHandler} = route.params;
     const [title, setTitle] = useState(movie.title);
     const [rating, setRating] = useState(movie.rating);
+    const [category, setCategory] = useState(movie.category);
     const [year, setYear] = useState(movie.year);
     const [sinopsis, setSinopsis] = useState(movie.sinopsis);
     const [clasification, setClasification] = useState(movie.clasification);
@@ -16,6 +17,7 @@ export default function EditMovieScreen({route, navigation}){
             ...movie,
             title,
             rating,
+            category,
             year,
             sinopsis,
             clasification,
@@ -38,6 +40,12 @@ export default function EditMovieScreen({route, navigation}){
                 placeholder = "Rating"
                 value={rating}
                 onChangeText={setRating}
+            />
+            <TextInput
+                style = {styles.input}
+                placeholder = "Category"
+                value={category}
+                onChangeText={setCategory}
             />
             <TextInput
                 style = {styles.input}

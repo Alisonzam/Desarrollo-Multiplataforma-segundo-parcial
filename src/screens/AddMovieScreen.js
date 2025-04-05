@@ -8,6 +8,7 @@ export default function AddMovieScreen({route, navigation}){
 
     const [title, setTitle] = useState('');
     const [rating, setRating] = useState('');
+    const [category, setCategory] = useState('');
     const [year, setYear] = useState('');
     const [sinopsis, setSinopsis] = useState('');
     const [clasification, setClasification] = useState('');
@@ -18,6 +19,7 @@ export default function AddMovieScreen({route, navigation}){
             id: uuidv4(),
             title,
             rating,
+            category,
             year,
             sinopsis,
             clasification,
@@ -51,6 +53,12 @@ export default function AddMovieScreen({route, navigation}){
                 placeholder = "Rating"
                 value={rating}
                 onChangeText={setRating}
+            />
+            <TextInput
+                style = {styles.input}
+                placeholder = "Category"
+                value={category}
+                onChangeText={setCategory}
             />
             <TextInput
                 style = {styles.input}

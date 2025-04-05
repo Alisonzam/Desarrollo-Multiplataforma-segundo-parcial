@@ -9,6 +9,7 @@ const moviesall=[
             id:1,
             title:"The Notebook",
             rating:"7.8",
+            category: "Romance",
             year:"2004",
             sinopsis:"In a retirement home a man reads to a woman, who suffers from Alzheimer's, the story of two young people from different social classes who fell in love during the turbulent 1940s, and how they were separated by third parties, and by the war.",
             clasification:"PG-13",
@@ -19,6 +20,7 @@ const moviesall=[
             id:2,
             title:"A Walk to Remember",
             rating:"7.3",
+            category: "Romance",
             year:"2002",
             sinopsis:"A young delinquent is forced to perform in a school play and begins an affair with the daughter of the town reverend.",
             clasification:"B",
@@ -29,6 +31,7 @@ const moviesall=[
             id:3,
             title:"LOVE Rosie",
             rating:"7.1",
+            category: "Romance",
             year:"2014",
             sinopsis:"Rosie and Alex are best friends until the family moves to the United States. They gamble everything to keep their love and friendship alive through the years and miles.",
             clasification:"R",
@@ -39,6 +42,7 @@ const moviesall=[
             id:4,
             title:"The Kissing Booth",
             rating:"5.9",
+            category: "Romance",
             year:"2018",
             sinopsis:"Elle's first kiss marks the beginning of a forbidden romance with the cutest boy in school, but it could also be the end of her relationship with her best friend.",
             clasification:"TV-14",
@@ -54,6 +58,7 @@ const moviesall=[
             id:1,
             title:"Tin & Tina",
             rating:"4.7",
+            category: "Suspense",
             year:"2023",
             sinopsis:"After suffering a traumatic miscarriage, a young couple adopts two peculiar twins in a convent, whose obsession with religion soon disturbs the family.",
             clasification:"PG-13",
@@ -64,6 +69,7 @@ const moviesall=[
             id:2,
             title:"Fractured",
             rating:"5.8",
+            category: "Suspense",
             year:"2019",
             sinopsis:"They went to the emergency room with their daughter, who had an accident. The wife takes her for a CT scan while he waits and the hours go by, but they never come back.",
             clasification:"PG-13",
@@ -74,6 +80,7 @@ const moviesall=[
             id:3,
             title:"What Happened to Monday",
             rating:"6.8",
+            category: "Suspense",
             year:"2017",
             sinopsis:"In a future where it is forbidden to have more than one child, six sisters pretending to be the same in order to go unnoticed try to escape oppressive government control while searching for the seventh sister, who has disappeared.",
             clasification:"TV-MA",
@@ -84,6 +91,7 @@ const moviesall=[
             id:4,
             title:"The Lovely Bones",
             rating:"6.6",
+            category: "Suspense",
             year:"2009",
             sinopsis:"After she is raped and murdered, a 14-year-old girl watches from heaven as her family tries to come to terms with what they have experienced and the murderer continues to go unpunished.",
             clasification:"B",
@@ -100,6 +108,7 @@ const moviesall=[
         id:1,
         title:"Lucca's World",
         rating:"6.8",
+        category: "Emotive",
         year:"2025",
         sinopsis:"Determined to help her son with cerebral palsy, Barbara takes her family to India to test an experimental treatment.",
         clasification:"G",
@@ -110,6 +119,7 @@ const moviesall=[
         id:2,
         title:"Miracles from Heaven",
         rating:"7.1",
+        category: "Emotive",
         year:"2016",
         sinopsis:"When Christy (Jennifer Garner) discovers that her 10-year-old daughter Ana (Kylie Rogers) has a rare and incurable disease, she does everything she can to find a cure or solution.",
         clasification:"G",
@@ -120,6 +130,7 @@ const moviesall=[
         id:3,
         title:"RADICAL",
         rating:"7.8",
+        category: "Emotive",
         year:"2023",
         sinopsis:"It is based on a 2012 newspaper article about Paloma Noyola, one of Juarez's students with an impressive mathematical ability and an enormous curiosity for astronomy.",
         clasification:"PG",
@@ -136,6 +147,7 @@ const moviesall=[
                 id:1,
                 title:"Maleficent",
                 rating:"7.9",
+                category: "Fantasy",
                 year:"2014",
                 sinopsis:"Young Maleficent grows up to protect her peaceful kingdom from invaders, but a terrible betrayal turns her pure heart to stone and turns her into a creature out for revenge.",
                 clasification:"PG",
@@ -146,6 +158,7 @@ const moviesall=[
                 id:2,
                 title:"Mulan",
                 rating:"5.8",
+                category: "Fantasy",
                 year:"2020",
                 sinopsis:"The Chinese emperor issues a decree requiring the recruitment of one male from each family to fight with the imperial army. To save her aging father from this duty, his only daughter, Fa Mulan, poses as a soldier and takes his place.",
                 clasification:"A",
@@ -156,6 +169,7 @@ const moviesall=[
                 id:3,
                 title:"Cinderella",
                 rating:"5.5",
+                category: "Fantasy",
                 year:"2015",
                 sinopsis:"A cruel stepmother makes Ella, her dead husband's only daughter, her servant, but a kindly beggar girl, some mice and a pumpkin change the young girl's fate forever.",
                 clasification:"A",
@@ -167,6 +181,7 @@ const moviesall=[
                 id:4,
                 title:"The Lion King",
                 rating:"6.8",
+                category: "Fantasy",
                 year:"2019",
                 sinopsis:"A young lion prince flees his kingdom only to learn the true meaning of responsibility and courage.",
                 clasification:"AA",
@@ -177,6 +192,7 @@ const moviesall=[
                 id:5,
                 title:"Aladdin",
                 rating:"6.9",
+                category: "Fantasy",
                 year:"2019",
                 sinopsis:"The story is about a young street boy who falls in love with Princess Jasmine and must stop a sorcerer who wants to usurp the throne.",
                 clasification:"PG",
@@ -307,6 +323,9 @@ export default function HomeScreenMovies({navigation}){
             <TouchableOpacity style={styles.addButton} onPress={restaurarPeliculas}>
                 <Text style={styles.addButtonText}>Restore Movies 🔄</Text>
             </TouchableOpacity>
+            <TouchableOpacity style={styles.addButton} onPress={() => navigation.reset({ index: 0, routes: [{ name: "Login" }] })}>
+                <Text style={styles.addButtonText}>Exit</Text>
+            </TouchableOpacity>
 
             
             <FlatList
@@ -316,6 +335,8 @@ export default function HomeScreenMovies({navigation}){
             style={{ width: '100%' }} 
             contentContainerStyle={{ paddingBottom: 200 }}
             /> 
+
+            
 
            
             
