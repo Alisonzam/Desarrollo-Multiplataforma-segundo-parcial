@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {View, TextInput, Button, StyleSheet, SafeAreaView} from "react-native";
+import {TextInput, Button, StyleSheet, SafeAreaView} from "react-native";
 import 'react-native-get-random-values';
 import {v4 as uuidv4} from 'uuid'; //Para crear identificadores unicos
 
@@ -7,6 +7,7 @@ export default function AddMovieScreen({route, navigation}){
     const {setMovies} = route.params;
 
     const [title, setTitle] = useState('');
+    const [rating, setRating] = useState('');
     const [category, setCategory] = useState('');
     const [year, setYear] = useState('');
     const [sinopsis, setSinopsis] = useState('');
@@ -17,6 +18,7 @@ export default function AddMovieScreen({route, navigation}){
         const newMovie = {
             id: uuidv4(),
             title,
+            rating,
             category,
             year,
             sinopsis,
@@ -36,9 +38,6 @@ export default function AddMovieScreen({route, navigation}){
             }
         });
         navigation.goBack();
-        //Operador de propagacion ... Lo que hace es hacer una replica de lo que estamos trabajando
-        //setAlbums(prevAlbums => [...prevAlbums, newAlbum]);
-        //navigation.goBack();
     }
 
     return(
@@ -48,6 +47,12 @@ export default function AddMovieScreen({route, navigation}){
                 placeholder = "Title"
                 value={title}
                 onChangeText={setTitle}
+            />
+            <TextInput
+                style = {styles.input}
+                placeholder = "Rating"
+                value={rating}
+                onChangeText={setRating}
             />
             <TextInput
                 style = {styles.input}
