@@ -47,24 +47,32 @@ export default function LoginScreen({navigation}){
 
     return(
         
-        <SafeAreaView>
-            
+        <SafeAreaView style={styles.fondo}>
+            <View style={styles.imagecontainer} >
+            <Image source={require('../../assets/Netflix-Symbol.png')}style={styles.image}/>
+            </View>
+                
+           
             
             <View style={styles.container} >
+                
                 <TextInput style={styles.input} placeholder="USER" value= {user} onChangeText={setUser}/>
                 <TextInput style={styles.inputp} placeholder="PASSWORD" value= {password} onChangeText={setPassword}/>
                 
             </View>
             <View style={[styles.container,styles.buttonText]}>
                 <TouchableOpacity style={[styles.button,styles.buttonText]} onPress={authentication}>
-                    <Text>LOGIN</Text>
+                    <Text style={styles.buttonText}>LOGIN</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.button} onPress={exitApp}>
-                    <Text>EXIT</Text>
-                </TouchableOpacity>
+              
                 <TouchableOpacity style={styles.button} onPress={goToRegister}>
-                    <Text>SIGN UP</Text>
+                    <Text style={styles.buttonText}>SIGN UP</Text>
                 </TouchableOpacity>
+            </View>
+            <View>
+            <TouchableOpacity style={styles.exit} onPress={exitApp}>
+                <Text>🔙</Text>
+            </TouchableOpacity>
             </View>
 
         </SafeAreaView>
@@ -82,9 +90,17 @@ const styles = StyleSheet.create({
         height: '120%'
       },
     image: {
-        width: 125, 
-        height: 125,
-        marginBottom: 20
+        width: 500, 
+        height: 300,
+        marginTop:10,
+        justifyContent:'flex-end',
+        alignItems:'center', 
+
+    },
+    imagecontainer: {
+        marginTop:10,
+        justifyContent:'flex-end',
+        alignItems:'center', 
 
     },
     TexView:{
@@ -104,7 +120,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         borderWidth:1,
         borderColor: '#ccc',
-        borderRadius:5,
+        borderRadius:15,
         padding:10,
         marginTop: 20,
         marginBottom:10,
@@ -118,7 +134,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         borderWidth:1,
         borderColor: '#ccc',
-        borderRadius:5,
+        borderRadius:15,
         padding:10,
         marginTop: 1,
         marginBottom:15,
@@ -128,6 +144,10 @@ const styles = StyleSheet.create({
     },
     inputText:{
 
+    },
+    fondo:{
+        backgroundColor:'black',
+        height:'100%'
     },
     container:{
         justifyContent:'flex-end',
@@ -148,15 +168,26 @@ const styles = StyleSheet.create({
         elevation: 2,
         marginTop:10,
         alignItems:'center',
-        marginEnd:0
+        marginEnd:0,
+        width:200
       },
       buttonText: {
         color: 'white',
         fontSize: 16,
+        fontWeight:'bold'
       },
       containerinput:{
         marginTop:30
-      }
+      },
+      exit:{
+        backgroundColor: 'red',
+        padding: 10,
+        borderRadius: 5,
+        marginBottom: 10,
+        marginTop:50,
+        width:40
+        
+    },
 });
 
 

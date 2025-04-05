@@ -1,5 +1,5 @@
 import React from "react";
-import { View,Text,Image,StyleSheet,SafeAreaView, Button } from "react-native";
+import { View,Text,Image,StyleSheet,SafeAreaView, Button, TouchableOpacity } from "react-native";
 
 export default function DetailsScreenMovie({route,navigation}){
     const {movie}=route.params;
@@ -18,13 +18,17 @@ export default function DetailsScreenMovie({route,navigation}){
             
             <View style={styles.textt}>   
                 <Text style={styles.title}>{movie.title}</Text>
-                <Text style={styles.description}>{movie.year}       {movie.rating}             {movie.clasification}</Text> 
+                <Text style={styles.description}>{movie.year}📽️                   {movie.clasification}👥        {movie.rating}📊</Text> 
             </View>
+            <TouchableOpacity style={styles.buttonplay}>
+            <Text  style={styles.title}>▶  Watch Movie</Text>
+           </TouchableOpacity>
             <View style={styles.textt2}>
                 <Text style={styles.text}>{movie.sinopsis}</Text>
             </View >
 
-           
+          
+
             <Button style={styles.button} onPress={goToRes} title="Reviews"/>
 
         </SafeAreaView>
@@ -43,19 +47,19 @@ const styles = StyleSheet.create({
     image:{
         width:'100%',
         height:300,
-        marginBottom:20
+        marginBottom:10
     },
     title:{
-        fontSize:24,
+        fontSize:20,
         fontWeight:'bold',
         marginBottom:10,
-        marginLeft:15,
-        marginTop:5
+        color:'white',
+        
     },
     description:{
-        fontSize:18,
+        fontSize:16,
         marginBottom:1,
-        marginLeft:20
+        color:'white'
     },
     rating:{
         fontSize:16,
@@ -63,37 +67,38 @@ const styles = StyleSheet.create({
         marginLeft:20
     },
     textt:{
-        marginLeft:20,
-        marginRight:20,
-        width:370,
-        height: 100,
-        borderWidth:2,
-        borderColor: '#ccc',
-        borderRadius:25,
-        padding:10,
-        marginTop: 10,
         marginBottom:10,
-        backgroundColor:'white'
+        justifyContent: 'flex-start',
+        display:'flex',
+        marginLeft:10
+        
     },
     textt2:{
-        marginLeft:20,
-        marginRight:20,
-        width:370,
+        
+        marginRight:10,
         height: 180,
-        borderWidth:2,
-        borderColor: '#ccc',
-        borderRadius:25,
         padding:10,
         marginTop: 10,
         marginBottom:80,
-        backgroundColor:'white'
+        
     },
-
+    buttonplay:{
+        justifyContent:'space-around',
+        backgroundColor:'gray',
+        borderRadius:10,
+        padding:5,
+        marginRight:10,
+        marginLeft:10,
+        marginTop:20,
+        alignItems:'center',
+    },
     text:{
-        fontSize:16,
-        marginLeft:20,
+        fontSize:14,
+        marginLeft:5,
         marginTop:5,
-        fontFamily:''
+        fontFamily:'',
+        color:'white',
+        textAlign:'justify'
     },
     texts:{
         fontSize:18,
@@ -102,7 +107,6 @@ const styles = StyleSheet.create({
     },
     fondo:{
         backgroundColor:'black',
-        alignItems:'center',
         width:420,
         height: 880,
 

@@ -89,8 +89,9 @@ const moviesall=[
         },
         {
             id:4,
-            title:"Desde mi cielo",
-            category:"Romance",
+            title:"The Lovely Bones",
+            rating:"6.6",
+            category: "Suspense",
             year:"2009",
             sinopsis:"After she is raped and murdered, a 14-year-old girl watches from heaven as her family tries to come to terms with what they have experienced and the murderer continues to go unpunished.",
             clasification:"B",
@@ -272,11 +273,7 @@ export default function HomeScreenMovies({navigation}){
         <TouchableOpacity style={styles.card} onPress={()=>navigation.navigate('MovieDetail',{movie:item})}>
             
             <Image source={{uri:item.image}} style={styles.image}/>
-            <View>
             
-            </View>
-            
-
             <View style={styles.buttonContainer}>
                 <TouchableOpacity style={styles.editButton} onPress={() => navigation.navigate('Edit', {movie: item, editMovieHandler})}>
                 <Text style={styles.buttonText}>🖋️</Text>
@@ -298,7 +295,6 @@ export default function HomeScreenMovies({navigation}){
             horizontal
             renderItem={renderMovie}
             keyExtractor={(movie)=>movie.id.toString()}
-            style={styles.Flailist}
             />
         </View>
     );
@@ -321,11 +317,21 @@ export default function HomeScreenMovies({navigation}){
              
             </View>
            
-
-            <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('Add', {setMovies})}>
-                <Text style={styles.addButtonText}>Agregar Album ➕</Text>
+            <View style={styles.buttoncontainer2}>
+            <TouchableOpacity style={styles.exit} onPress={() => navigation.reset({ index: 0, routes: [{ name: "Login" }] })}>
+                <Text style={styles.restoretext}>🔙</Text>
             </TouchableOpacity>
+            <TouchableOpacity style={styles.restore} onPress={restaurarPeliculas}>
+                <Text style={styles.restoretext}>🔄</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.addButton} onPress={() => navigation.navigate('Add', {setMovies})}>
+                <Text style={styles.restoretext}>Add Movie ╋</Text>
+            </TouchableOpacity>
+            </View>
+            
+            
 
+            
             <FlatList
             data={busqueda}
             renderItem={rendercategory}
@@ -333,6 +339,10 @@ export default function HomeScreenMovies({navigation}){
             style={{ width: '100%' }} 
             contentContainerStyle={{ paddingBottom: 200 }}
             /> 
+            <View>
+            
+            </View>
+            
 
            
             
@@ -352,19 +362,20 @@ const styles = StyleSheet.create({
         backgroundColor:'black',
         borderRadius:10,
         overflow:'visible',
-        borderWidth:1,
+        borderWidth:3,
         marginTop:15,
+        marginLeft:5,
         marginRight:10,
         width:170,
-        height:250
+        height:260
     },
     image:{
         width:'100%',
         height:150,
-        borderRadius:10,
+        borderRadius:10
     },
     title:{
-        fontSize:14,
+        fontSize:18,
         fontWeight:'',
         padding:10,
         alignItems:'center',
@@ -386,35 +397,59 @@ const styles = StyleSheet.create({
     category:{
         fontSize:20,
         color:'white',
-        marginTop:0,
-        marginLeft:10,
-        fontWeight:'bold'
+        marginTop:10,
+        fontWeight:'bold',
+        marginLeft:20
     },
     buttonContainer: {
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        
+        display:'flex',
+        marginTop: 10,
+        marginRight:10
+    },
+    buttoncontainer2:{
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        marginTop: -20,
+        marginRight:0,
+        marginLeft:40
     },
     editButton: {
-        backgroundColor: 'gray',
-        padding: 10,
-        borderRadius: 35,
+        borderRadius: 50,
         marginRight: 5
     },
     deleteButton: {
-        backgroundColor: '#e7e7e7',
-        padding: 10,
-        borderRadius: 55
+        borderRadius: 50
     },
     buttonText: {
         color: '#fff',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontSize:20
     },
-    addButton: {
-        backgroundColor: '#686b6c',
+    restore:{
         padding: 10,
         borderRadius: 5,
-        marginBottom: 5,
+        marginBottom: 10,
+        marginTop:10,
+    },
+    restoretext:{
+        fontSize:20,
+        color:'white'
+    },
+    exit:{
+        backgroundColor: 'red',
+        padding: 10,
+        borderRadius: 5,
+        marginBottom: 10,
+        marginTop:10,
+        marginRight:180
+    },
+    addButton: {
+        backgroundColor: '#969696',
+        padding: 10,
+        borderRadius: 5,
+        marginBottom: 10,
         marginTop:10
     },
     addButtonText: {
@@ -457,9 +492,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,       
         marginVertical: 10,         
       },
-      Flailist:{
-        marginLeft:10
-      }
 
 })
     
