@@ -8,6 +8,7 @@ import SignUpScreenMovie from "../screens/SignUpScreen";
 import EditScreenMovie from "../screens/EditMovieScreen";
 import AddScreenMovie from "../screens/AddMovieScreen";
 
+
 const Stack = createNativeStackNavigator();
 
 export default function NavigationMovie(){
