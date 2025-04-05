@@ -23,4 +23,4 @@ export default function NavigationMovie(){
         </Stack.Navigator>
     )
 }
-
+//Comentario
