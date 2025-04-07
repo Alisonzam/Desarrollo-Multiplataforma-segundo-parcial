@@ -301,7 +301,7 @@ export default function HomeScreenMovies({navigation}){
     return(
         
         <SafeAreaView style={styles.fondo}>
-            <Text style={styles.title2}>TEC M O V I E S</Text>
+            <Text style={styles.title2}>T E C M O V I E S</Text>
 
             <View style={styles.buttonRow}>
             <TouchableOpacity style={styles.sortButton} onPress={ordenar}>
@@ -337,7 +337,7 @@ export default function HomeScreenMovies({navigation}){
             renderItem={rendercategory}
             keyExtractor={categor => categor.category}
             style={{ width: '100%' }} 
-            contentContainerStyle={{ paddingBottom: 200 }}
+            contentContainerStyle={{ paddingBottom: 270 }}
             /> 
             <View>
             
