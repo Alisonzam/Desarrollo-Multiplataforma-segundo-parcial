@@ -301,8 +301,7 @@ export default function HomeScreenMovies({navigation}){
     return(
         
         <SafeAreaView style={styles.fondo}>
-            <Text style={styles.title2}>T E C M O V I E S</Text>
-
+            <Image source={require('../../assets/title.jpg')} style={styles.image}/>
             <View style={styles.buttonRow}>
             <TouchableOpacity style={styles.sortButton} onPress={ordenar}>
                 <Text style={styles.sortButtonText}>A-Z ↑↓</Text>
@@ -490,7 +489,8 @@ const styles = StyleSheet.create({
       buttonRow: {
         flexDirection: 'row',        
         paddingHorizontal: 10,       
-        marginVertical: 10,         
+        marginVertical: 10,
+        marginTop:-20         
       },
 
 })
